@@ -24,7 +24,7 @@ pipeline {
         stage('Static Code Analysis') {
             // Code Analysis will happend, the Sonar server configured and URL written in the environment below
             environment {
-                SONAR_URL = "http://3.89.227.188:9000"
+                SONAR_URL = "http://3.81.230.133:9000/"
             }
             // Starting the Static Code Analysis 
             steps {
@@ -51,7 +51,7 @@ pipeline {
                 script {
                     // If Checkbox tick then, Perform this stage
                     if (params.YES) {
-                        sh 'jfrog rt upload --url http://34.228.44.32:8082/artifactory/ --access-token ${ARTIFACTORY_ACCESS_TOKEN} target/*.jar springboot-web-app/'
+                        sh 'jfrog rt upload --url http://54.166.41.28:8082//artifactory/ --access-token ${ARTIFACTORY_ACCESS_TOKEN} target/*.jar springboot-web-app/'
                     } else {
                         // If Checkbox not tick then, Skip this stage and go for the next stage
                         return
@@ -63,7 +63,7 @@ pipeline {
         stage('Build & Push Docker Image') {
             // Credentials of DockerHub which stored in the Jenkins Credentials
             environment {
-                DOCKER_IMAGE = "avian19/spring-docker:${BUILD_NUMBER}"
+                DOCKER_IMAGE = "yogesh793/spring-docker:${BUILD_NUMBER}"
                 REGISTRY_CREDENTIALS = credentials('docker-cred')
             }
             steps {
@@ -83,14 +83,14 @@ pipeline {
             // GIT Repo and username
             environment {
                 GIT_REPO_NAME = "Springboot-end-to-end"
-                GIT_USER_NAME = "AmanPathak-DevOps"
+                GIT_USER_NAME = "yogeshhhh"
             }
             steps {
                 // Replacing the previous BUILD_NUMBER with NEW_BUILD_NUMBER and pushing the changes to Github
                 withCredentials([string(credentialsId: 'github', variable: 'GITHUB_TOKEN')]) {
                     sh '''
-                        git config user.email "aman07pathak@gmail.com"
-                        git config user.name "AmanPathak-DevOps"
+                        git config user.email "sharma.yogesh715@gmail.com"
+                        git config user.name "yogeshhhh"
                         BUILD_NUMBER=${BUILD_NUMBER}
                         imageTag=$(grep -oP '(?<=spring-docker:)[^ ]+' deployment.yml)
                         sed -i "s/spring-docker:${imageTag}/spring-docker:${BUILD_NUMBER}/" deployment.yml
