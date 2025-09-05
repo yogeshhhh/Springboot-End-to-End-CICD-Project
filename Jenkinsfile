@@ -15,13 +15,6 @@ pipeline {
         }
     }
     
-
-    stages {
-        stage('Cleanup') {
-          steps {
-          deleteDir()  // wipes out the workspace completely
-    }
-}
         // Building the Maven Project
         stage('Build & Test') {
             steps {
