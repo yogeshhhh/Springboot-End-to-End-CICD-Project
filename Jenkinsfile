@@ -14,6 +14,12 @@ pipeline {
             args '--user root -v /var/run/docker.sock:/var/run/docker.sock'
         }
     }
+    stage('Cleanup') {
+    steps {
+        deleteDir()  // wipes out the workspace completely
+    }
+}
+
     stages {
         // Building the Maven Project
         stage('Build & Test') {
