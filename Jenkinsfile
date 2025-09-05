@@ -51,7 +51,7 @@ pipeline {
                 script {
                     // If Checkbox tick then, Perform this stage
                     if (params.YES) {
-                        sh 'jfrog rt upload --url http://54.166.41.28:8082//artifactory/ --access-token ${ARTIFACTORY_ACCESS_TOKEN} target/*.jar springboot-web-app/'
+                        sh 'jfrog rt upload --url http://54.166.41.28:8082/artifactory/ --access-token ${ARTIFACTORY_ACCESS_TOKEN} target/*.jar springboot-web-app/'
                     } else {
                         // If Checkbox not tick then, Skip this stage and go for the next stage
                         return
