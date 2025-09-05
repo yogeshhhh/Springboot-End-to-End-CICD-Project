@@ -16,6 +16,6 @@ spec:
     spec:
       containers:
       - name: spring-boot-app
-        image: yogesh793/spring-docker:v1 
+        image: yogesh793/spring-docker:16 
         ports:
         - containerPort: 8080
